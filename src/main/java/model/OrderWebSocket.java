@@ -1,9 +1,12 @@
 package model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
-import org.apache.logging.log4j.core.LifeCycle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import service.BotLogic;
+import service.FibonacciOrderService;
 import service.SignatureService;
 import util.Endpoints;
 import util.Expires;
@@ -11,9 +14,10 @@ import util.WeirdKeyStorage;
 import javax.websocket.*;
 import java.io.IOException;
 import java.net.URI;
-import java.nio.ByteBuffer;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -21,20 +25,13 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @ClientEndpoint
 public class OrderWebSocket {
-
     private final static Logger logger = LoggerFactory.getLogger(OrderWebSocket.class);
-
     private final long MAX_DELAY = 5000;
-
+    private BotLogic logic = new FibonacciOrderService(new FibonacciOrderSet(6,100,100));
     public OrderWebSocket() {
         apiExpires = Expires.createExpires();
         message = getMessage();
-        try {
-            apiSignature = SignatureService.getSignature(WeirdKeyStorage.SECRET_KEY, message);
-        } catch (NoSuchAlgorithmException | InvalidKeyException e) {
-            logger.error("Signature creation error >> " + e.getMessage());
-//            throw new RuntimeException(e);
-        }
+        apiSignature = SignatureService.getSignature(WeirdKeyStorage.SECRET_KEY, message);
     }
     private String apiExpires;
     private String message;
@@ -51,8 +48,10 @@ public class OrderWebSocket {
             session.setMaxIdleTimeout(TimeUnit.MINUTES.toMillis(60));
             if (session.isOpen()) {
                 isConnected = true;
+                logger.debug("session has been established >> ");
                 session.getBasicRemote().sendText(getAuthentication());
                 session.getBasicRemote().sendText(getOrderSubscribe());
+                logic.start();
             }
         } catch (DeploymentException | IOException e) {
             System.out.println(e.getMessage());
@@ -68,7 +67,8 @@ public class OrderWebSocket {
             return;
         }
         logger.debug("Last time updated by info >> " + lastMessageTime.toString());
-        System.out.println(info);
+//        System.out.println(info);
+        logic.update(info);
     }
 
     public void heartBitTimer() {
@@ -122,5 +122,4 @@ public class OrderWebSocket {
     private String getOrderSubscribe() {
         return "{\"op\": \"subscribe\", \"args\": [\"order\"]}";
     }
-
 }

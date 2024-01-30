@@ -34,4 +34,15 @@ public class OrderResponse {
     public String timestamp;
 
     public OrderResponse() {}
+
+    @Override
+    public String toString() {
+        return "OrderResponse{" +
+                "orderID='" + orderID + '\'' +
+                ", side='" + side + '\'' +
+                ", orderQty=" + orderQty +
+                ", price=" + price +
+                ", ordStatus='" + ordStatus + '\'' +
+                '}';
+    }
 }
