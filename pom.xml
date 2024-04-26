@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.example</groupId>
-  <artifactId>BitmexBot</artifactId>
+  <artifactId>bitmexbot</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
 
@@ -15,18 +15,6 @@
   </properties>
 
   <dependencies>
-<!--    <dependency>-->
-<!--      <groupId>jakarta.websocket</groupId>-->
-<!--      <artifactId>jakarta.websocket-api</artifactId>-->
-<!--      <version>2.1.1</version>-->
-<!--      <scope>provided</scope>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>jakarta.websocket</groupId>-->
-<!--      <artifactId>jakarta.websocket-client-api</artifactId>-->
-<!--      <version>2.1.1</version>-->
-<!--      <scope>provided</scope>-->
-<!--    </dependency>-->
       <dependency>
           <groupId>org.glassfish.tyrus.bundles</groupId>
           <artifactId>tyrus-standalone-client</artifactId>
@@ -49,20 +37,30 @@
       <artifactId>gson</artifactId>
       <version>2.10.1</version>
     </dependency>
-    <dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-      <version>20231013</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.json</groupId>-->
+<!--      <artifactId>json</artifactId>-->
+<!--      <version>20231013</version>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>2.16.0</version>
     </dependency>
+<!--      <dependency>-->
+<!--          <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--          <artifactId>jackson-annotations</artifactId>-->
+<!--          <version>2.16.1</version>-->
+<!--      </dependency>-->
     <dependency>
-    <groupId>commons-codec</groupId>
-    <artifactId>commons-codec</artifactId>
-    <version>1.13</version>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>2.16.1</version>
+    </dependency>
+    <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>1.13</version>
     </dependency>
       <dependency>
           <groupId>org.apache.logging.log4j</groupId>
@@ -84,10 +82,26 @@
           <artifactId>hibernate-core</artifactId>
           <version>6.4.2.Final</version>
       </dependency>
+<!--      <dependency>-->
+<!--          <groupId>org.hibernate</groupId>-->
+<!--          <artifactId>hibernate-entitymanager</artifactId>-->
+<!--          <version>5.6.15.Final</version>-->
+<!--      </dependency>-->
+      <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <version>8.0.33</version>
+      </dependency>
       <dependency>
           <groupId>jakarta.xml.bind</groupId>
           <artifactId>jakarta.xml.bind-api</artifactId>
           <version>4.0.0</version>
+      </dependency>
+      <dependency>
+          <groupId>jakarta.servlet</groupId>
+          <artifactId>jakarta.servlet-api</artifactId>
+          <version>6.0.0</version>
+          <scope>provided</scope>
       </dependency>
       <dependency>
           <groupId>org.glassfish.jaxb</groupId>
@@ -95,9 +109,39 @@
           <version>4.0.0</version>
       </dependency>
       <dependency>
+          <groupId>org.glassfish.jaxb</groupId>
+          <artifactId>jaxb-core</artifactId>
+          <version>4.0.4</version>
+      </dependency>
+      <dependency>
+          <groupId>org.glassfish.jaxb</groupId>
+          <artifactId>jaxb-xjc</artifactId>
+          <version>4.0.4</version>
+      </dependency>
+<!--      <dependency>-->
+<!--          <groupId>org.glassfish</groupId>-->
+<!--          <artifactId>jakarta.json</artifactId>-->
+<!--          <version>2.0.1</version>-->
+<!--      </dependency>-->
+      <dependency>
+          <groupId>com.sun.xml.bind</groupId>
+          <artifactId>jaxb-core</artifactId>
+          <version>2.3.0.1</version>
+      </dependency>
+      <dependency>
+          <groupId>javax.xml.bind</groupId>
+          <artifactId>jaxb-api</artifactId>
+          <version>2.3.1</version>
+      </dependency>
+      <dependency>
+          <groupId>com.sun.xml.bind</groupId>
+          <artifactId>jaxb-impl</artifactId>
+          <version>2.3.1</version>
+      </dependency>
+      <dependency>
           <groupId>org.javassist</groupId>
           <artifactId>javassist</artifactId>
-          <version>3.29.0-GA</version>
+          <version>3.25.0-GA</version>
       </dependency>
   </dependencies>
   <build>
@@ -111,8 +155,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>11</source>
-          <target>11</target>
+          <source>17</source>
+          <target>17</target>
         </configuration>
       </plugin>
     </plugins>

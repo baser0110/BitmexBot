@@ -1,13 +1,10 @@
 package model;
 
 import lombok.Data;
-import lombok.Getter;
 import model.order_parameters.OrdType;
 import model.order_parameters.Side;
 import model.order_parameters.Symbol;
-import util.CurrentMarkPrice;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +21,7 @@ public class FibonacciOrderSet {
         this.size = size;
         if (level <= 0 || step <= 0 || size <= 0) throw new IllegalArgumentException("Arguments must be positive!");
         if (step % 100 != 0) throw new IllegalArgumentException("The step must be a multiple of 100");
+        if (size % 100 != 0) throw new IllegalArgumentException("The size must be a multiple of 100");
         switch (level) {
             case 1: fibSeq.add(1); break;
             case 2: fibSeq.add(1); fibSeq.add(1); break;
