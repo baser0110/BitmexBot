@@ -7,7 +7,6 @@ import util.Verb;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class OrderGetTest extends BasicOrder {
-
     private boolean reverse = true;
     private Double count;
     public OrderGetTest(Double count) {

@@ -1,15 +1,21 @@
-package model;
+package entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import java.util.Date;
 
 @Data
 @Entity
-@Table (name = "user")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Table (name = "users", schema = "bitmexbot")
 public class User {
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
-    private Integer id;
+    private String id;
     @Column (name = "username")
     private String username;
     @Column (name = "password")
@@ -18,4 +24,8 @@ public class User {
     private String secretKey;
     @Column (name = "api_key")
     private String apiKey;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date")
+    private Date createDate;
 }

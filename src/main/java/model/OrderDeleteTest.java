@@ -2,6 +2,7 @@ package model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Setter;
 import util.Verb;
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -17,6 +18,6 @@ public class OrderDeleteTest extends BasicOrder{
         verb = Verb.DELETE;
 
         this.orderID = orderID;
-        this.text = "has been canceled";
+        this.text = "has been canceled for redistribution";
         }
 }

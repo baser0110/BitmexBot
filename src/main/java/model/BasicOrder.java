@@ -21,4 +21,5 @@ public class BasicOrder {
     protected String getExtendURL() {
         return extendURL;
     }
+
 }
